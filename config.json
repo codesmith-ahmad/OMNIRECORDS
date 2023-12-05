@@ -1,0 +1,32 @@
+{
+	"consoleSettings":{
+		"windowTitle": "MyTerminal",
+		"backgroundColor": "Black",
+		"foregroundColor": "DarkYellow",
+		"foregroundANSI": "`e[33m"
+	},
+	"paths": {
+		"nexus": "C:\\Users\\Ahmad\\ONEDRI~1\\NEXUS",
+		"AESkey": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\KEYS\\.key",
+		"modules": ".\\Modules",
+		"ressources": ".\\Ressources",
+		"scripts": ".\\Scripts",
+		"classroom": {
+			"location": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom",
+			"mathbook": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom\\math_practice_book.pdf",
+			"progress": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom\\progress.json",
+			"notes":"C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom\\notes.txt"	
+		}
+    },
+    "database": {
+      "connectionString": "Server=myServer;Database=myDatabase;User=myUser;Password=myPassword;"
+    },
+    "apiKeys": {
+      "weatherApiKey": "YOUR_API_KEY_HERE",
+      "paymentGatewayApiKey": "ANOTHER_API_KEY"
+    },
+    "features": {
+      "featureAEnabled": true,
+      "featureBEnabled": false
+    }
+}
