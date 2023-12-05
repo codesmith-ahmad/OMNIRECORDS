@@ -5,6 +5,10 @@
 		"foregroundColor": "DarkYellow",
 		"foregroundANSI": "`e[33m"
 	},
+	"database": {
+		"path": "C:\\OMNIRECORDS\\Database\\OMNIRECORDS.db",
+		"connectionString": "Server=myServer;Database=myDatabase;User=myUser;Password=myPassword;"
+    },
 	"paths": {
 		"nexus": "C:\\Users\\Ahmad\\ONEDRI~1\\NEXUS",
 		"AESkey": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\KEYS\\.key",
@@ -17,9 +21,6 @@
 			"progress": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom\\progress.json",
 			"notes":"C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom\\notes.txt"	
 		}
-    },
-    "database": {
-      "connectionString": "Server=myServer;Database=myDatabase;User=myUser;Password=myPassword;"
     },
     "apiKeys": {
       "weatherApiKey": "YOUR_API_KEY_HERE",
