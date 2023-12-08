@@ -6,7 +6,7 @@
 		"foregroundANSI": "`e[33m"
 	},
 	"database": {
-		"path": "C:\\OMNIRECORDS\\Database\\OMNIRECORDS.db",
+		"path": "C:\\OMNIRECORDS\\OMNIRECORDS.db",
 		"connectionString": "Server=myServer;Database=myDatabase;User=myUser;Password=myPassword;"
     },
 	"paths": {
