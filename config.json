@@ -5,10 +5,7 @@
 		"foregroundColor": "DarkYellow",
 		"foregroundANSI": "`e[33m"
 	},
-	"database": {
-		"path": "C:\\OMNIRECORDS\\OMNIRECORDS.db",
-		"connectionString": "Server=myServer;Database=myDatabase;User=myUser;Password=myPassword;"
-    },
+	"database": "C:\\OMNIRECORDS\\omnirecords.db",
 	"paths": {
 		"nexus": "C:\\Users\\Ahmad\\ONEDRI~1\\NEXUS",
 		"AESkey": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\KEYS\\.key",
