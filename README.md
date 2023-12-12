@@ -1,18 +1,17 @@
-# My Database Management terminal: OMNIRECORDS (replacing Memento Database)
+# OMNIRECORDS: Custom SQLite terminal (replacing Memento Database)
 
-# Need to update below
+---
 
-## Table of Contents
+## Table of Contents (ADD SQLite-related cmdlets!!!!)
 
 - [! Critical Discoveries](#!)
-- [TODO](#todo)
 - [Set Up](#set-up-repository)
-- [Disable "Loading profiles took X ms" message](#disable-loading-profiles-took-x-ms-message)
 - [Modules](#modules)
 - [Changing Text Color](#changing-text-color)
 - [Hash Tables](#hash-tables)
 - [JSON Manipulation](#json-manipulation)
 - [Cryptography (Encryption and Decryption)](#cryptography)
+- [Ideas](#some-ideas-from-old-project)
 - [References](#references)
 
 ---
@@ -31,84 +30,31 @@
 
 ---
 
-## TODO
+## Set Up Repository First Time
 
-See TODO comments in profile
+Download and Install **SQLite** and **DB Browser for SQLite**
 
-### Details
+Press: `Win` + `X`, `I`
 
-About frequency: when time runs out, create a copy of this task, but add frequency to deadline, reset status. As for the original, set as OVERDUE
+Enter the following commands:
 
-##### CREATE
-
-\> new-task # OR create
-Title: _____     # if \$null, cancel
-Deadline: ______ # if \$null, add 24 hours and set Status as "unscheduled"
-	# example: aug,25,8  ==>  August 25th at 8 am
-Repeatable? [Enter to skip or "n {D|M|Y}"]: _______  # if \$null, set as \$null
-   1. APP
-   2. FIN
-   3. HOME
-   4. BILL
-   5. ACA
-   6. CAR
-   7. SPEC
-Category 1-7: ______
-
-TODO:
-1. Generate new ID
-2. Set title as received
-3. Deadline
-	3.1 Handle null case
-	3.2 Parse String, call setDeadline
-4. Parse frequency and return array
-5. Set category as received or NONE if null
-6. Save to JSON
-7. Report to user
-
-##### RETRIEVE
-
-(On script load) Load ALL JSON into hashtable
-(On script load) Convert hash to PSOB and display
-
-> get/select <ID>  # Display info on specific task
-> get/select *     # Calculates time remaining and display nicely formatted table
-
-##### UPDATE
-
-> update/set <ID> [-newid] [-t] [-d] [-f] [-s] [-c] [-p] [-done]
-	[-newid] (replaces id)
-	[-t] (change title, no compute)
-	[-d] (change deadline, compute required)
-	[-f] (change frequency, compute required)
-	[-s] (change status, no computate)
-	[-c] (change cat, no compute)
-	[-p] (change priority, no usage yet)
-	[-done] (set as complete)
-
-##### DELETE
-
-> delete/del <ID>
-
-##### SPECIAL COMMANDS
-
-finish <ID>  # same as update <ID> -done
-
----
-
-## Set Up Repository (bad, need update)
-
-To clone this repo: `Win` + `X`, `I`
 ```shell
-cd $home/Documents
-git clone https://github.com/CavalierAhmad/powershell #Can skip next step if rename ths repo?
-ren "powershell" "WindowsPowerShell" #Not tested
-# git should be functional but test to make sure: git status
+'. "C:\OMNIRECORDS\origin.ps1"' > $profile # Redirects PowerShell to my repository
+# If fail, create all required subdirectories
+```
+```shell
+cd C:\ ; mkdir OMNIRECORDS ; cd OMNIRECORDS # Create workspace then move to it
+```
+```shell
+git init # Initialize repository
+```
+```shell
+git clone https://github.com/codesmith-ahmad/OMNIRECORDS.git # Clone this repo
 ```
 
----
+Make sure to set on branch `baby` before adding and committing.
 
-## Disable "Loading profiles took X ms" message
+### Disable "Loading profiles took X ms" message
 
 To disable the "Loading profiles took X ms" message, go to [C:\Users\ahmad\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json](C:/Users/ahmad/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState)
 (change `ahmad` to actual username)
@@ -202,7 +148,8 @@ That's it! You've created a basic PowerShell module with a custom function. You 
 ---
 
 ## Changing text color
-**Examples:**
+
+**Enter `$PSStyle` in Powershell to see all ANSI codes for Powershell styles**
 
 #### Using ANSI Escape Code
 
@@ -335,21 +282,22 @@ $RNG = New-Object System.Security.Cryptography.RNGCryptoServiceProvider
 $RNG.getBytes($key)         # Generate array of 16 random bytes
 $key > .\.key               # Store key, key is ready
 ```
-##### ENCRYPT (Plaintext to Ciphertext)
+##### ENCRYPT (Plaintext >> SecureString >> Ciphertext)
 ```powershell
 # ENCRYPTION
 $plaintext = "secret to be encrypted"
-$securestring = $plaintext | convertto-securestring -asplaintext -force
-    # or user input: $securestring = read-host -assecurestring
-$ciphertext = $securestring | convertfrom-securestring -key $key # LOCKED
+$secureString = $plaintext | convertto-securestring -asplaintext -force
+    # or user input: $secureString = read-host -assecurestring
+$ciphertext = $secureString | convertfrom-securestring -key $key # ENCRYPTED SUCCESSFULLY
 $ciphertext > .\.encrypted                                       # Store ciphertext
 ```
-##### DECRYPT (Ciphertext to Plaintext)
+##### DECRYPT (Ciphertext >> SecureString >> BinaryString >> Plaintext)
 ```powershell
 # DECRYPTION
 $ciphertext = cat .\.encrypted # Retrieve ciphertext and key
-$securestring = $ciphertext | convertto-securestring -key $key # Cannot be UNLOCKED without proper key
-$plaintext = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR([System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($securestring))
+$secureString = $ciphertext | convertto-securestring -key $key # DECRYPTED iff $key is correct!
+$binaryString = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($secureString)
+$plaintext = [System.Runtime.InteropServices.Marshal]::PtrToStringBSTR($binaryString)
 ```
 
 #### Future improvement
@@ -401,6 +349,68 @@ Answer:
 >Remember to securely store the salt value along with the derived key, as you'll need it when you want to derive the key again during decryption. Additionally, ensure that the password you choose is strong and that you follow best practices for password security.
 
 >Key derivation from a password is a common technique for encrypting data with a user-supplied passphrase. It allows you to use something easier to remember (the passphrase) to derive a strong encryption key.
+
+
+---
+
+## Some ideas from old project
+
+About frequency: when time runs out, create a copy of this task, but add frequency to deadline, reset status. As for the original, set as OVERDUE
+
+##### CREATE
+
+\> new-task # OR create
+Title: _____     # if \$null, cancel
+Deadline: ______ # if \$null, add 24 hours and set Status as "unscheduled"
+	# example: aug,25,8  ==>  August 25th at 8 am
+Repeatable? [Enter to skip or "n {D|M|Y}"]: _______  # if \$null, set as \$null
+   1. APP
+   2. FIN
+   3. HOME
+   4. BILL
+   5. ACA
+   6. CAR
+   7. SPEC
+Category 1-7: ______
+
+TODO:
+1. Generate new ID
+2. Set title as received
+3. Deadline
+	3.1 Handle null case
+	3.2 Parse String, call setDeadline
+4. Parse frequency and return array
+5. Set category as received or NONE if null
+6. Save to JSON
+7. Report to user
+
+##### RETRIEVE
+
+(On script load) Load ALL JSON into hashtable
+(On script load) Convert hash to PSOB and display
+
+> get/select <ID>  # Display info on specific task
+> get/select *     # Calculates time remaining and display nicely formatted table
+
+##### UPDATE
+
+> update/set <ID> [-newid] [-t] [-d] [-f] [-s] [-c] [-p] [-done]
+	[-newid] (replaces id)
+	[-t] (change title, no compute)
+	[-d] (change deadline, compute required)
+	[-f] (change frequency, compute required)
+	[-s] (change status, no computate)
+	[-c] (change cat, no compute)
+	[-p] (change priority, no usage yet)
+	[-done] (set as complete)
+
+##### DELETE
+
+> delete/del <ID>
+
+##### SPECIAL COMMANDS
+
+finish <ID>  # same as update <ID> -done
 
 ---
 
