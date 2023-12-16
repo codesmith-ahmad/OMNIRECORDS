@@ -6,7 +6,11 @@ function view ($table){
 
 function viewExpenses {
 
-    $x = (sql select * from ExpensesView)
+    $x = (sql 'select * from ExpensesView')
+    $z = (sql 'select * from ExpensesViewAggr')
+        $z.Bill = "`e[7m" + $z.Bill + "`e[0m"
+        $z.Note = "`e[2m`e[3mCredit-sourced amounts are not included in sum`e[0m"
+    $x = $x + $z
 
     foreach ($row in $x){
         $row.Deadline = (Get-date $row.Deadline -format "MMM d").toUpper()
