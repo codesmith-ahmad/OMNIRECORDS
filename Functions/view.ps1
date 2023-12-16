@@ -35,7 +35,8 @@ function viewExpenses {
         if ($row.isPaid -eq $true) {$row.isPaid = "`e[94mTrue`e[0m"}
     }
 
+    Write-Host "`n`e[4m`e[32mEXPENSES`e[0m"
     $x | Format-Table
 
-    Write-Host "`e[4mDISPLAY OPTIONS HERE: update X3`e[0m`n"
+    Write-Host "`n`e[3m`e[93mTO MAKE PAYMENT: `e[4m`e[92mupdate ID`e[24m`e[93m, replace ID by Expenses.id`e[0m`n"
 }
