@@ -76,6 +76,42 @@ Add **-nologo** to `"commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v
 
 ---
 
+## SQLite CASE (if/then)
+
+```sql
+CASE
+    WHEN ___ < ___ THEN a
+    WHEN ___ > ___ THEN b
+    ELSE c
+END AS x
+```
+
+RETURNS x = a or x = b or x = c depending on first true condition
+
+---
+
+## SQLite View Template
+
+```sql
+CREATE VIEW _____ AS
+
+    WITH -- This is the declaration section, put all constants and "functions", AKA Common Table Expressions here
+
+        CTE1 AS (______),  -- subquery goes here
+        CTE2 AS (______),
+        ...
+
+    SELECT -- This is the actual view section
+
+        _____ AS Column1,
+        _____ AS Column2,
+        _____ AS Column3
+
+    FROM `Table`, CTE1, CTE2, ...    
+```
+
+---
+
 ## Modules
 
 Creating a PowerShell module is a great way to encapsulate and share reusable functions, cmdlets, and resources. Here's a basic example of a simple PowerShell module:
