@@ -85,6 +85,8 @@ function updateExpenses ($id){
         return
     }
 
+    backup # SAVEPOINT: USE [RESTORE] TO UNDO CHANGES ***************************************
+
     # Check if the expense is paid
     if ($expense.isPaid -eq 0) {
         $confirmPayment = Read-Host -Prompt "`e[93mCONFIRM `e[4m$($expense.Amount)`e[24m$ has been paid to `e[4m$($expense.Bill)`e[24m? `e[7m[Y]`e[27m Yes `e[7m[N]`e[27m No`e[0m"
@@ -101,7 +103,10 @@ function updateExpenses ($id){
         $updateDeadline = Read-Host -Prompt "`e[93mUpdate deadline? `e[7m[Y]`e[27m Yes `e[7m[N]`e[27m No`e[0m"
         if ($updateDeadline.ToLower() -eq 'y') {
             # Create a copy of the row
-            sql "INSERT INTO ExpensesLog (Id, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid) VALUES (id, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid) FROM Expenses WHERE id = $id;"
+            $query  = "INSERT INTO ExpensesLog (Id, Bill, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid)"
+            $query += " SELECT id, Bill, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid"
+            $query += " FROM Expenses WHERE id = $id"
+            sql $query
 
             # Update the deadline based on the frequency unit
             if ($expense.FrequencyUnit -eq 'M') {
