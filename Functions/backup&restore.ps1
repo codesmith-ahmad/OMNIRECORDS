@@ -17,8 +17,8 @@ function backup {
     $checkpointPath = "C:\OMNIRECORDS\tmp\last-checkpoint"
 
     # Copy omnirecords.db to backup path
-    Copy-Item "C:\OMNIRECORDS\omnirecords.db" -Destination "$backupPath.db"
-    Copy-Item "C:\OMNIRECORDS\omnirecords.db" -Destination "$checkpointPath"
+    Copy-Item $config.database -Destination "$backupPath.db"
+    Copy-Item $config.database -Destination "$checkpointPath"
 
     Write-Host "Backup complete"
 }
@@ -29,13 +29,13 @@ function restore {
     $checkpointPath = "C:\OMNIRECORDS\tmp\last-checkpoint"
 
     # Copy omnirecords.db to backup path
-    Copy-Item "C:\OMNIRECORDS\omnirecords.db" -Destination "$backupPath.db"
+    Copy-Item $config.database -Destination "$backupPath.db"
 
     # Delete omnirecords.db
-    Remove-Item "C:\OMNIRECORDS\omnirecords.db" -Force
+    Remove-Item $config.database -Force
 
     # Copy the checkpoint file back to the original location
-    Copy-Item -Path $checkpointPath -Destination "C:\OMNIRECORDS\omnirecords.db" -Force
+    Copy-Item -Path $checkpointPath -Destination $config.database -Force
 
     # # Rename the checkpoint file to omnirecords.db
     # Rename-Item -Path "C:\OMNIRECORDS\omnirecords.db" -NewName "omnirecords.db" -Force
