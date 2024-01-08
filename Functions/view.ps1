@@ -1,7 +1,22 @@
+
+# Routing function
 function view ($table){
     if (-not $table){<#prompt for table#>}
     $table = $table.ToLower()
-    if ($table -eq "Expenses") {viewExpenses}
+    if ($table -eq "archives") {viewArchives}
+    if ($table -eq "expenses") {viewExpenses}
+}
+
+function viewArchives {
+    $archives = (sql 'select * from Archives')
+    foreach ($row in $archives){
+        $row.Documents = "" + $config.database + "\..\" + $row.Documents
+    }
+
+    Write-Host "`n`e[7m`e[4m`e[32mARCHIVES`e[27m`e[0m"
+    $archives | Format-Table
+
+    Write-Host "`n`e[3m`e[93mTo archive something: `e[4m`e[92marchive [filepath]`e[24m`e[93m`e[0m`n"
 }
 
 function viewExpenses {
