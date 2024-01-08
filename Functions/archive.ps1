@@ -14,6 +14,7 @@ function archive ($path) {
         sql 'SELECT * FROM Archives' | Format-Table
 
         Write-Host "File saved at:"
-        Write-Host "" + $config.database + "\OmniRecords-Library\Archives\$nameOfFile"
+        $output = "" + $config.database + "\..\OmniRecords-Library\Archives\$nameOfFile"
+        Write-Host $output
     }
 }
