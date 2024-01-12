@@ -1,10 +1,21 @@
 
+# TODO : FOR FUNCTION view, INCLUDE SECOND AND THIRD ARGUMENT FOR "WHERE" STATEMENT:
+<#
+    view assignments deadline (date).tostring("yyyy-MM-dd")
+    >> $table = 'assignments'
+    >>   $key = 'deadline'
+    >> $value = '2024-01-12'
+    >> $whereClause = "WHERE $key = `'$value`'"
+    >>       $query = $query + $whereClause
+#>
+
 # Routing function
 function view ($table){
     if (-not $table){<#prompt for table#>}
     $table = $table.ToLower()
-    if ($table -eq "archives") {viewArchives}
-    if ($table -eq "expenses") {viewExpenses}
+    if ($table -eq "archives")    {viewArchives}
+    if ($table -eq "assignments") {viewAssignments}
+    if ($table -eq "expenses")    {viewExpenses}
 }
 
 function viewArchives {
@@ -17,6 +28,20 @@ function viewArchives {
     $archives | Format-Table
 
     Write-Host "`n`e[3m`e[93mTo archive something: `e[4m`e[92marchive [filepath]`e[24m`e[93m`e[0m`n"
+}
+
+function viewAssignments {
+    $assignments = (sql 'select * from Assignments')
+    foreach ($row in $assignments){
+        if ($row.status -eq "not started"){$row.status = "`e[31m" + $row.status + "`e[0m"}
+        if ($row.status -eq "in progress"){$row.status = "`e[93m" + $row.status + "`e[0m"}
+        if ($row.status -eq "done")       {$row.status = "`e[92m" + $row.status + "`e[0m"}
+    }
+
+    Write-Host "`n`e[7m`e[4m`e[32mASSIGNMENTS`e[27m`e[0m"
+    $assignments | Format-Table
+
+    Write-Host "`n`e[3m`e[93mTo do action: `e[4m`e[92mcommand [arg]`e[24m`e[93m`e[0m`n"
 }
 
 function viewExpenses {
@@ -40,7 +65,7 @@ function viewExpenses {
             $row.id = "`e[5m" + $row.id + "`e[0m"        # Flash id
             $row.Bill = "`e[5m" + $row.Bill + "`e[0m"    # Flash bill name
         }
-        elseif ($y -le 3){$row.Remains = "`e[31m" + $row.Remains}     # Apply red
+        elseif ($y -le 3){$row.Remains = "`e[31m" + $row.Remains} # Apply red
         elseif ($y -le 5){$row.Remains = "`e[91m" + $row.Remains} # Apply bright red
         elseif ($y -le 7){$row.Remains = "`e[93m" + $row.Remains} # Apply yellow
         

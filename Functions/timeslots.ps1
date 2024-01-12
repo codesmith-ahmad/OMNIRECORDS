@@ -28,4 +28,5 @@ function create-timeslots {
 
 }
 
-create-timeslots
+# Testing purposes only
+# create-timeslots
