@@ -20,9 +20,6 @@ function view ($table){
 
 function viewArchives {
     $archives = (sql 'select * from Archives')
-    foreach ($row in $archives){
-        $row.Documents = "" + $config.database + "\..\" + $row.Documents
-    }
 
     Write-Host "`n`e[7m`e[4m`e[32mARCHIVES`e[27m`e[0m"
     $archives | Format-Table
@@ -52,7 +49,7 @@ function viewExpenses {
         $z.monthly = "`e[93m" + [math]::Round($z.monthly,2) + "`$`e[0m"
         $z.weekly = "`e[93m" + [math]::Round($z.weekly,2) + "`$`e[0m"
         $z.daily = "`e[93m" + [math]::Round($z.daily,2) + "`$`e[0m"
-        $z.note = "`e[2m`e[3m$z.note`e[0m"
+        $z.note = "`e[2m`e[3m" + $z.note + "`e[0m"
     $x = $x + $z
 
     foreach ($row in $x){
