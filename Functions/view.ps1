@@ -48,31 +48,31 @@ function viewExpenses {
 
     $x = (sql 'select * from ExpensesView')
     $z = (sql 'select * from ExpensesViewAggr')
-        $z.Bill = "`e[7m`e[25m" + $z.Bill + "`e[0m"
-        $z.Monthly = "`e[93m" + [math]::Round($z.Monthly,2) + "`$`e[0m"
-        $z.Weekly = "`e[93m" + [math]::Round($z.Weekly,2) + "`$`e[0m"
-        $z.Daily = "`e[93m" + [math]::Round($z.Daily,2) + "`$`e[0m"
-        $z.Note = "`e[2m`e[3mCredit-sourced amounts are not included in sum`e[0m"
+        $z.bill = "`e[7m`e[25m" + $z.bill + "`e[0m"
+        $z.monthly = "`e[93m" + [math]::Round($z.monthly,2) + "`$`e[0m"
+        $z.weekly = "`e[93m" + [math]::Round($z.weekly,2) + "`$`e[0m"
+        $z.daily = "`e[93m" + [math]::Round($z.daily,2) + "`$`e[0m"
+        $z.note = "`e[2m`e[3m$z.note`e[0m"
     $x = $x + $z
 
     foreach ($row in $x){
-        $row.Deadline = (Get-date $row.Deadline -format "MMM d").toUpper()
+        $row.deadline = (Get-date $row.deadline -format "MMM d").toUpper()
 
-        $y = $row.Remains
-        $row.Remains = [math]::Round($y)
+        $y = $row.remaining
+        $row.remaining = [math]::Round($y)
         if ($y -le 0){
-            $row.Remains = "`e[5m`e[31m" + $row.Remains  # Apply blink AND red
+            $row.remaining = "`e[5m`e[31m" + $row.remaining  # Apply blink AND red
             $row.id = "`e[5m" + $row.id + "`e[0m"        # Flash id
-            $row.Bill = "`e[5m" + $row.Bill + "`e[0m"    # Flash bill name
+            $row.bill = "`e[5m" + $row.bill + "`e[0m"    # Flash bill name
         }
-        elseif ($y -le 3){$row.Remains = "`e[31m" + $row.Remains} # Apply red
-        elseif ($y -le 5){$row.Remains = "`e[91m" + $row.Remains} # Apply bright red
-        elseif ($y -le 7){$row.Remains = "`e[93m" + $row.Remains} # Apply yellow
+        elseif ($y -le 3){$row.remaining = "`e[31m" + $row.remaining} # Apply red
+        elseif ($y -le 5){$row.remaining = "`e[91m" + $row.remaining} # Apply bright red
+        elseif ($y -le 7){$row.remaining = "`e[93m" + $row.remaining} # Apply yellow
         
-        $row.Remains = "" + $row.Remains + " days`e[0m"
+        $row.remaining = "" + $row.remaining + " days`e[0m"
 
-        if ($row.isPaid -eq $false){$row.isPaid = "`e[31mFalse`e[0m"}
-        if ($row.isPaid -eq $true) {$row.isPaid = "`e[94mTrue`e[0m"}
+        if ($row.isPaid -eq $false){$row.isPaid = "`e[31mfalse`e[0m"}
+        if ($row.isPaid -eq $true) {$row.isPaid = "`e[94mtrue`e[0m"}
     }
 
     Write-Host "`n`e[7m`e[4m`e[32mEXPENSES`e[27m`e[0m"
