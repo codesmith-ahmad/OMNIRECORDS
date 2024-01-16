@@ -39,7 +39,7 @@ function launchAssignmentForm {
         $deadline = Read-Host "Enter Deadline (Mdd)"
         [int] $month = $deadline / 100
         [int] $day   = $deadline % 100
-        $deadline = "2024-" + $month + "-" + $day
+        $deadline = (date ("2024-" + $month + "-" + $day)).tostring("yyyy-MM-dd")
         $e = 0
 
         try {date $deadline}
