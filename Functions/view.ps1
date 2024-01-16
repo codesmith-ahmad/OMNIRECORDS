@@ -1,21 +1,16 @@
 
 # TODO : FOR FUNCTION view, INCLUDE SECOND AND THIRD ARGUMENT FOR "WHERE" STATEMENT:
-<#
-    view assignments deadline (date).tostring("yyyy-MM-dd")
-    >> $table = 'assignments'
-    >>   $key = 'deadline'
-    >> $value = '2024-01-12'
-    >> $whereClause = "WHERE $key = `'$value`'"
-    >>       $query = $query + $whereClause
-#>
 
-# Routing function
+# Routing function for the most used tables
 function view ($table){
     if (-not $table){<#prompt for table#>}
     $table = $table.ToLower()
     if ($table -eq "archives")    {viewArchives}
     if ($table -eq "assignments") {viewAssignments}
+    if ($table -eq "courses")     {sql 'select * from courses_info' -t}
     if ($table -eq "expenses")    {viewExpenses}
+    if ($table -eq "passwords")   {sql 'select * from credentials' -t}
+    if ($table -eq "tasks")       {sql 'select * from tasks' -t} 
 }
 
 function viewArchives {
@@ -28,17 +23,32 @@ function viewArchives {
 }
 
 function viewAssignments {
-    $assignments = (sql 'select * from Assignments')
+    $assignments = (sql 'select * from AssignmentsView')
+    $urgencyLevel = @{
+        low = 7
+        med = 4
+        high = 2
+    }
+
     foreach ($row in $assignments){
+        #status
         if ($row.status -eq "not started"){$row.status = "`e[31m" + $row.status + "`e[0m"}
-        if ($row.status -eq "in progress"){$row.status = "`e[93m" + $row.status + "`e[0m"}
-        if ($row.status -eq "done")       {$row.status = "`e[92m" + $row.status + "`e[0m"}
+        elseif ($row.status -eq "in progress"){$row.status = "`e[93m" + $row.status + "`e[0m"}
+        elseif ($row.status -eq "done")       {$row.status = "`e[92m" + $row.status + "`e[0m"}
+        #lifetime
+        if ($row.lifetime -le $urgencyLevel.high){
+            $row.lifetime = "`e[41m`e[97m   " + $row.lifetime + "   `e[0m"
+            $row.description = "`e[5m" + $row.description + "`e[0m"
+            $row.id = "`e[5m" + $row.id + "`e[0m"
+        }
+        elseif ($row.lifetime -le $urgencyLevel.med) {$row.lifetime = "`e[103m`e[30m   " + $row.lifetime + "   `e[0m"}
+        elseif ($row.lifetime -le $urgencyLevel.low) {$row.lifetime = "`e[92m   " + $row.lifetime + "   `e[0m"}
     }
 
     Write-Host "`n`e[7m`e[4m`e[32mASSIGNMENTS`e[27m`e[0m"
     $assignments | Format-Table
 
-    Write-Host "`n`e[3m`e[93mTo do action: `e[4m`e[92mcommand [arg]`e[24m`e[93m`e[0m`n"
+    # Write-Host "`n`e[3m`e[93mActions:\n`e[0m"
 }
 
 function viewExpenses {
