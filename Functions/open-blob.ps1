@@ -12,3 +12,19 @@ function open-blob ($uniqueId){
     elseif ($tableCode -eq "e") {"opening BLOB $id from expenses ^_^"}
     else {"No such table code or id"}
 }
+
+function open {
+    param (
+        [byte[]]$blob,
+        [string]$ext
+        )
+
+    try {
+        $tempFilePath = [System.IO.Path]::GetTempFileName() + ".$ext"
+        [System.IO.File]::WriteAllBytes($tempFilePath, $blob)
+        Start-Process $tempFilePath
+    }
+    catch {
+        Write-Host "Error opening the BLOB: $_"
+    }
+}
