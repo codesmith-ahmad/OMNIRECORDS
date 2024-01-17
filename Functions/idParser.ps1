@@ -9,7 +9,7 @@ function idParser {
     )
 
     # Use a regular expression to match the letters and numbers
-    $match = $inputString -match '^([a-zA-Z]{1,3})(\d{1,3})$'
+    $match = $inputString -match '^([a-zA-Z]{1,4})(\d{1,3})$'
 
     if ($match) {
         $letters = $matches[1]
