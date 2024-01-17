@@ -9,6 +9,6 @@ function sql {
 
     #$query = $args -join " "
     $result = invoke-sqlitequery -datasource $config.database -Query $query
-    if ($t){return $result | Format-Table}
+    if ($t){return $result | Format-Table -wrap}
     else   {return $result}
 }

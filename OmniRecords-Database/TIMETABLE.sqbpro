@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/OMNIRECORDS/OmniRecords-Database/omnirecords.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="66"/><column_width id="3" width="5961"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,8:mainarchives"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="AssignmentsView" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="52"/><column index="3" value="141"/><column index="4" value="62"/><column index="5" value="55"/><column index="6" value="69"/><column index="7" value="280"/><column index="8" value="60"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="ExpensesView" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="121"/><column index="3" value="116"/><column index="4" value="123"/><column index="5" value="130"/><column index="6" value="73"/><column index="7" value="123"/><column index="8" value="52"/><column index="9" value="45"/><column index="10" value="300"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="OMNIRECORDS_TODO" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="4" mode="0"/></sort><column_widths><column index="1" value="40"/><column index="2" value="117"/><column index="3" value="300"/><column index="4" value="56"/><column index="5" value="255"/><column index="6" value="692"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="TimetableView" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="41"/><column index="2" value="40"/><column index="3" value="56"/><column index="4" value="59"/><column index="5" value="75"/><column index="6" value="84"/><column index="7" value="68"/><column index="8" value="47"/><column index="9" value="68"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="archives" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="166"/><column index="3" value="282"/><column index="4" value="73"/><column index="5" value="65"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="assignments" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="52"/><column index="3" value="141"/><column index="4" value="73"/><column index="5" value="69"/><column index="6" value="280"/><column index="7" value="60"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="car_repairs" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="85"/><column index="2" value="71"/><column index="3" value="178"/><column index="4" value="107"/><column index="5" value="46"/><column index="6" value="300"/><column index="7" value="300"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="documents" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="172"/><column index="3" value="57"/><column index="4" value="300"/><column index="5" value="73"/><column index="6" value="73"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="events" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="2" mode="0"/></sort><column_widths><column index="1" value="40"/><column index="2" value="168"/><column index="3" value="74"/><column index="4" value="71"/><column index="5" value="77"/><column index="6" value="68"/><column index="7" value="59"/><column index="8" value="74"/><column index="9" value="79"/><column index="10" value="258"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="new_timetable" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="77"/><column index="2" value="68"/><column index="3" value="55"/><column index="4" value="59"/><column index="5" value="61"/><column index="6" value="82"/><column index="7" value="67"/><column index="8" value="46"/><column index="9" value="67"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="old_assignments" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="52"/><column index="3" value="129"/><column index="4" value="73"/><column index="5" value="69"/><column index="6" value="280"/><column index="7" value="60"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="test" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="414"/><column index="2" value="597"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="timeslots" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="79"/><column index="2" value="66"/><column index="3" value="77"/><column index="4" value="68"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="timetable" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="1" mode="0"/></sort><column_widths><column index="1" value="77"/><column index="2" value="68"/><column index="3" value="84"/><column index="4" value="91"/><column index="5" value="76"/><column index="6" value="82"/><column index="7" value="67"/><column index="8" value="69"/><column index="9" value="67"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">DROP TRIGGER update_timetable_insert;
+
+CREATE TRIGGER update_timetable_insert
+AFTER INSERT ON &quot;events&quot;
+BEGIN
+	UPDATE timetable
+	SET sunday = CASE WHEN NEW.weekdays &amp;  1 &gt; 0 THEN NEW.id ELSE timetable.sunday    END,
+		monday = CASE WHEN NEW.weekdays &amp;  2 &gt; 0 THEN NEW.id ELSE timetable.monday    END,
+	   tuesday = CASE WHEN NEW.weekdays &amp;  4 &gt; 0 THEN NEW.id ELSE timetable.tuesday   END,
+	 wednesday = CASE WHEN NEW.weekdays &amp;  8 &gt; 0 THEN NEW.id ELSE timetable.wednesday END,
+	  thursday = CASE WHEN NEW.weekdays &amp; 16 &gt; 0 THEN NEW.id ELSE timetable.thursday  END,
+	    friday = CASE WHEN NEW.weekdays &amp; 32 &gt; 0 THEN NEW.id ELSE timetable.friday    END,
+	  saturday = CASE WHEN NEW.weekdays &amp; 64 &gt; 0 THEN NEW.id ELSE timetable.saturday  END
+	WHERE timetable.start_time &gt;= NEW.start_time AND timetable.end_time &lt;= NEW.end_time;
+END;
+
+-- DUMMY INSERT
+INSERT INTO &quot;main&quot;.&quot;events&quot;
+(&quot;weekdays&quot;, &quot;start_time&quot;, &quot;end_time&quot;, &quot;location&quot;, &quot;label&quot;)
+VALUES (4, 1100, 1300, 'DUMMY', 'DUMMY');
+
+-- TEST RESULT
+SELECT * FROM timetable
+
+-- COMPARE WITH EVENTS
+SELECT * FROM events
+
+
+
+
+-- CLEAR DUMMY
+DELETE FROM events WHERE label = 'DUMMY'
+
+-- CLEAR TIMETABLE
+UPDATE timetable
+SET sunday = null,
+	monday = null,
+	tuesday = null,
+	wednesday = null,
+	thursday = null,
+	friday = null,
+	saturday = null;
+
+
+
+
+-------------------------
+
+CREATE TABLE &quot;events&quot; (
+	&quot;id&quot;	INTEGER NOT NULL UNIQUE,
+	&quot;weekdays&quot;	INTEGER,
+	&quot;start_time&quot;	INTEGER NOT NULL,
+	&quot;end_time&quot;	INTEGER NOT NULL,
+	&quot;location&quot;	TEXT NOT NULL,
+	&quot;label&quot;	TEXT NOT NULL,
+	&quot;type&quot;	TEXT,
+	&quot;start_date&quot;	TEXT,
+	&quot;end_date&quot;	TEXT,
+	&quot;note&quot;	TEXT,
+	PRIMARY KEY(&quot;id&quot; AUTOINCREMENT)
+)
+
+CREATE TABLE &quot;timetable&quot; (
+	&quot;start_time&quot; INTEGER,
+	&quot;end_time&quot;	 INTEGER,
+	&quot;sunday&quot;	 INTEGER,
+	&quot;monday&quot;	 INTEGER,
+	&quot;tuesday&quot;	 INTEGER,
+	&quot;wednesday&quot;	 INTEGER,
+	&quot;thursday&quot;	 INTEGER,
+	&quot;friday&quot;	 INTEGER,
+	&quot;saturday&quot;	 INTEGER
+)</sql><sql name="SQL 2">DROP VIEW TimetableView;
+
+CREATE VIEW TimetableView AS
+SELECT
+	timetable.start_time as start,
+	timetable.end_time as end,
+	(select events.id || '~' || label from events where sunday    = events.id) as Sunday,
+	(select events.id || '~' || label from events where monday    = events.id) as Monday,
+	(select events.id || '~' || label from events where tuesday   = events.id) as Tuesday,
+	(select events.id || '~' || label from events where wednesday = events.id) as Wednesday,
+	(select events.id || '~' || label from events where thursday  = events.id) as Thursday,
+	(select events.id || '~' || label from events where friday    = events.id) as Friday,
+	(select events.id || '~' || label from events where saturday  = events.id) as Saturday
+FROM timetable, events;
+
+select * from TimetableView</sql><current_tab id="1"/></tab_sql></sqlb_project>
