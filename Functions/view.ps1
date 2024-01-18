@@ -10,7 +10,7 @@ function view ($table){
     if ($table -eq "courses")     {sql 'select * from courses_info' -t}
     if ($table -eq "expenses")    {viewExpenses}
     if ($table -eq "passwords")   {sql 'select * from credentials' -t}
-    if ($table -eq "tasks")       {sql 'select * from tasks' -t} 
+    if ($table -eq "tasks")       {viewTasks} 
 }
 
 function viewArchives {
@@ -86,4 +86,35 @@ function viewExpenses {
     $x | Format-Table
 
     Write-Host "`n`e[3m`e[93mTO MAKE PAYMENT: `e[4m`e[92mupdate ID`e[24m`e[93m, replace ID by Expenses.id`e[0m`n"
+}
+
+function viewTasks {
+    $tasks = (sql 'select * from TaskView')
+    $urgencyLevel = @{
+        low = 7
+        med = 4
+        high = 2
+    }
+
+    foreach ($row in $tasks){
+        #priority
+        if ($row.priority -eq 'CRITICAL'){$row.priority = "`e[31m" + $row.priority + "`e[0m"}
+        #status
+        if ($row.status -eq "not started"){$row.status = "`e[31m" + $row.status + "`e[0m"}
+        elseif ($row.status -eq "in progress"){$row.status = "`e[93m" + $row.status + "`e[0m"}
+        elseif ($row.status -eq "done")       {$row.status = "`e[92m" + $row.status + "`e[0m"}
+        #time_left
+        if ($row.time_left -le $urgencyLevel.high){
+            $row.time_left = "`e[41m`e[97m   " + $row.time_left + "   `e[0m"
+            $row.task = "`e[5m" + $row.task + "`e[0m"
+            $row.id = "`e[5m" + $row.id + "`e[0m"
+        }
+        elseif ($row.time_left -le $urgencyLevel.med) {$row.time_left = "`e[103m`e[30m   " + $row.time_left + "   `e[0m"}
+        elseif ($row.time_left -le $urgencyLevel.low) {$row.time_left = "`e[92m   " + $row.time_left + "   `e[0m"}
+    }
+
+    Write-Host "`n`e[7m`e[4m`e[32mTASKS`e[27m`e[0m"
+    $tasks | Format-Table
+
+    # Write-Host "`n`e[3m`e[93mActions:\n`e[0m"
 }
