@@ -46,7 +46,7 @@ function viewAssignments {
     }
 
     Write-Host "`n`e[7m`e[4m`e[32mASSIGNMENTS`e[27m`e[0m"
-    $assignments | Format-Table
+    $assignments | Format-Table -wrap
 
     # Write-Host "`n`e[3m`e[93mActions:\n`e[0m"
 }
@@ -114,7 +114,7 @@ function viewTasks {
     }
 
     Write-Host "`n`e[7m`e[4m`e[32mTASKS`e[27m`e[0m"
-    $tasks | Format-Table
+    $tasks | Format-Table -wrap
 
     # Write-Host "`n`e[3m`e[93mActions:\n`e[0m"
 }
