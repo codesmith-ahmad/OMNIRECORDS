@@ -103,20 +103,20 @@ function updateExpenses ($id){
         $updateDeadline = Read-Host -Prompt "`e[93mUpdate deadline? `e[7m[Y]`e[27m Yes `e[7m[N]`e[27m No`e[0m"
         if ($updateDeadline.ToLower() -eq 'y') {
             # Create a copy of the row
-            $query  = "INSERT INTO ExpensesLog (Id, Bill, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid)"
-            $query += " SELECT id, Bill, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid"
-            $query += " FROM Expenses WHERE id = $id"
-            sql $query
+            # $query  = "INSERT INTO ExpensesLog (Id, Bill, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid)"
+            # $query += " SELECT id, Bill, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid"
+            # $query += " FROM Expenses WHERE id = $id"
+            # sql $query
 
             # Update the deadline based on the frequency unit
-            if ($expense.FrequencyUnit -eq 'M') {
-                # Set Deadline = Deadline + frequencyNumber * months
-                sql "UPDATE Expenses SET Deadline = date('$($expense.Deadline)', '+$($expense.FrequencyNumber) months') WHERE id = $id;"
-            }
-            elseif ($expense.FrequencyUnit -eq 'D') {
-                # Set Deadline = Deadline + frequencyNumber * days
-                sql "UPDATE Expenses SET Deadline = date('$($expense.Deadline)', '+$($expense.FrequencyNumber) days') WHERE id = $id;"
-            }
+            # if ($expense.FrequencyUnit -eq 'M') {
+            #     # Set Deadline = Deadline + frequencyNumber * months
+            #     sql "UPDATE Expenses SET Deadline = date('$($expense.Deadline)', '+$($expense.FrequencyNumber) months') WHERE id = $id;"
+            # }
+            # elseif ($expense.FrequencyUnit -eq 'D') {
+            #     # Set Deadline = Deadline + frequencyNumber * days
+            #     sql "UPDATE Expenses SET Deadline = date('$($expense.Deadline)', '+$($expense.FrequencyNumber) days') WHERE id = $id;"
+            # }
 
             # Set isPaid to 0
             sql "UPDATE Expenses SET isPaid = 0 WHERE id = $id;"
