@@ -2,27 +2,28 @@
 # TODO : FOR FUNCTION view, INCLUDE SECOND AND THIRD ARGUMENT FOR "WHERE" STATEMENT:
 
 # Routing function for the most used tables
-function view ($table){
+function view ($table, $wrapSignal){
     if (-not $table){<#prompt for table#>}
     $table = $table.ToLower()
-    if ($table -eq "archives")    {viewArchives}
-    if ($table -eq "assignments") {viewAssignments}
+    if ($table -eq "archives")    {viewArchives $wrapSignal}
+    if ($table -eq "assignments") {viewAssignments $wrapSignal}
     if ($table -eq "courses")     {sql 'select * from courses_info' -t}
-    if ($table -eq "expenses")    {viewExpenses}
-    if ($table -eq "passwords")   {viewPasswords}
-    if ($table -eq "tasks")       {viewTasks} 
+    if ($table -eq "expenses")    {viewExpenses $wrapSignal}
+    if ($table -eq "passwords")   {viewPasswords $wrapSignal}
+    if ($table -eq "tasks")       {viewTasks $wrapSignal} 
 }
 
-function viewArchives {
+function viewArchives ($wrapSignal) {
     $archives = (sql 'select * from Archives')
 
     Write-Host "`n`e[7m`e[4m`e[32mARCHIVES`e[27m`e[0m"
-    $archives | Format-Table
+    if (-not ($wrapSignal)){$archives | Format-Table}
+    else {$archives | Format-Table -wrap}
 
     Write-Host "`n`e[3m`e[93mTo archive something: `e[4m`e[92marchive [filepath]`e[24m`e[93m`e[0m`n"
 }
 
-function viewAssignments {
+function viewAssignments ($wrapSignal) {
     $assignments = (sql 'select * from AssignmentsView')
     $urgencyLevel = @{
         low = 7
@@ -46,12 +47,13 @@ function viewAssignments {
     }
 
     Write-Host "`n`e[7m`e[4m`e[32mASSIGNMENTS`e[27m`e[0m"
-    $assignments | Format-Table -wrap
+    if (-not ($wrapSignal)){$assignments | Format-Table}
+    else {$assignments| Format-Table -wrap}
 
     # Write-Host "`n`e[3m`e[93mActions:\n`e[0m"
 }
 
-function viewExpenses {
+function viewExpenses ($wrapSignal){
 
     $x = (sql 'select * from ExpensesView')
     $z = (sql 'select * from ExpensesViewAggr')
@@ -83,21 +85,23 @@ function viewExpenses {
     }
 
     Write-Host "`n`e[7m`e[4m`e[32mEXPENSES`e[27m`e[0m"
-    $x | Format-Table
+    if (-not ($wrapSignal)){$x | Format-Table}
+    else {$x | Format-Table -wrap}
 
     Write-Host "`n`e[3m`e[93mTO MAKE PAYMENT: `e[4m`e[92mupdate ID`e[24m`e[93m, replace ID by Expenses.id`e[0m`n"
 }
 
-function viewPasswords {
-    $key = Get-Content (sql 'select * from metadata where key = "aes_key"').value # fetch 16-byte key
+function viewPasswords ($wrapSignal){
+    $key = Get-Content (sql 'select * from addresses where key = "aes_key"').filepath # fetch 16-byte key
     $cred = sql 'select * from CredentialsView' # fetch table
     foreach ($row in $cred){$row.pass = "`e[93m" + (decrypt $row.pass $key) + "`e[0m"} # convert each cipher to text
 
     Write-Host "`n`e[7m`e[4m`e[32mPASSWORDS`e[27m`e[0m"
-    $cred | Format-Table -wrap
+    if (-not ($wrapSignal)){$cred | Format-Table}
+    else {$cred | Format-Table -wrap}
 }
 
-function viewTasks {
+function viewTasks ($wrapSignal){
     $tasks = (sql 'select * from TaskView')
     $urgencyLevel = @{
         low = 7
@@ -123,7 +127,8 @@ function viewTasks {
     }
 
     Write-Host "`n`e[7m`e[4m`e[32mTASKS`e[27m`e[0m"
-    $tasks | Format-Table -wrap
+    if (-not ($wrapSignal)){$tasks | Format-Table}
+    else {$tasks | Format-Table -wrap}
 
     # Write-Host "`n`e[3m`e[93mActions:\n`e[0m"
 }
