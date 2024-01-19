@@ -9,7 +9,7 @@ function view ($table){
     if ($table -eq "assignments") {viewAssignments}
     if ($table -eq "courses")     {sql 'select * from courses_info' -t}
     if ($table -eq "expenses")    {viewExpenses}
-    if ($table -eq "passwords")   {sql 'select * from credentials' -t}
+    if ($table -eq "passwords")   {viewPasswords}
     if ($table -eq "tasks")       {viewTasks} 
 }
 
@@ -86,6 +86,15 @@ function viewExpenses {
     $x | Format-Table
 
     Write-Host "`n`e[3m`e[93mTO MAKE PAYMENT: `e[4m`e[92mupdate ID`e[24m`e[93m, replace ID by Expenses.id`e[0m`n"
+}
+
+function viewPasswords {
+    $key = Get-Content (sql 'select * from metadata where key = "aes_key"').value # fetch 16-byte key
+    $cred = sql 'select * from CredentialsView' # fetch table
+    foreach ($row in $cred){$row.pass = "`e[93m" + (decrypt $row.pass $key) + "`e[0m"} # convert each cipher to text
+
+    Write-Host "`n`e[7m`e[4m`e[32mPASSWORDS`e[27m`e[0m"
+    $cred | Format-Table -wrap
 }
 
 function viewTasks {
