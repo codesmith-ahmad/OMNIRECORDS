@@ -12,7 +12,7 @@ RESTORE:
 #>
 
 function backup {
-    $timestamp = Get-Date -Format "MMdd-HHmmss"
+    $timestamp = Get-Date -Format "MMMdd-HHmmss"
     $backupPath = "C:\OMNIRECORDS\tmp\omnirecords_$timestamp"
     $checkpointPath = "C:\OMNIRECORDS\tmp\last-checkpoint"
 
