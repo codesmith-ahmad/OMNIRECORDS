@@ -3,7 +3,7 @@ function update ($idString){
     if (-not $idString){Write-Host "`e[31mSPECIFY ID`e[0m"}
     else {
         $parsedID = idParser $idString
-        if ($parsedID[0] -eq 0){echo "break!" ; break}
+        if ($parsedID[0] -eq 0){Write-Output "break!" ; break}
         $table = $parsedID[0].ToLower()
         $id = $parsedID[1]
         if ($table -eq 'a'){updateAssignments $id}
@@ -80,7 +80,7 @@ function updateExpenses ($id){
     # Retrieve the expense with the given id
     $expense = sql "SELECT * FROM Expenses WHERE id = $id"
 
-    if ($expense -eq $null) {
+    if ($null -eq $expense) {
         Write-Host "Expense with id $id not found."
         return
     }
@@ -102,24 +102,25 @@ function updateExpenses ($id){
     elseif ($expense.isPaid -eq 1) {
         $updateDeadline = Read-Host -Prompt "`e[93mUpdate deadline? `e[7m[Y]`e[27m Yes `e[7m[N]`e[27m No`e[0m"
         if ($updateDeadline.ToLower() -eq 'y') {
-            # Create a copy of the row
-            # $query  = "INSERT INTO ExpensesLog (Id, Bill, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid)"
-            # $query += " SELECT id, Bill, isLoan, Amount, FrequencyNumber, FrequencyUnit, Deadline, Source, Note, isPaid"
-            # $query += " FROM Expenses WHERE id = $id"
-            # sql $query
+            $years  = [int] ($expense.frequency / 100000)
+            $months = [int] ($expense.frequency % 100000 / 1000)
+            $days   = [int] ($expense.frequency % 1000)
+            $date   = (Get-date $expense.deadline).addYears($years).addMonths($months).addDays($days)
+            $date   = $date.toString("yyyy-MM-dd")
 
-            # Update the deadline based on the frequency unit
-            # if ($expense.FrequencyUnit -eq 'M') {
-            #     # Set Deadline = Deadline + frequencyNumber * months
-            #     sql "UPDATE Expenses SET Deadline = date('$($expense.Deadline)', '+$($expense.FrequencyNumber) months') WHERE id = $id;"
-            # }
-            # elseif ($expense.FrequencyUnit -eq 'D') {
-            #     # Set Deadline = Deadline + frequencyNumber * days
-            #     sql "UPDATE Expenses SET Deadline = date('$($expense.Deadline)', '+$($expense.FrequencyNumber) days') WHERE id = $id;"
-            # }
+            sql @"
+BEGIN TRANSACTION;
 
-            # Set isPaid to 0
-            sql "UPDATE Expenses SET isPaid = 0 WHERE id = $id;"
+UPDATE expenses
+SET deadline = "$date"
+where id = $id;
+
+UPDATE expenses 
+SET isPaid = 0
+WHERE id = $id;
+
+COMMIT;
+"@
         }
         else {
             Write-Host "Deadline not updated. Exiting."
@@ -128,5 +129,5 @@ function updateExpenses ($id){
     }
 
     # Display results when done
-    view Expenses
+    view expenses
 }
