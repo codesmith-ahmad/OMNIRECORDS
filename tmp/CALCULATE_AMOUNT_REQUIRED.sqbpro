@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:\OMNIRECORDS\omnirecords.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="browser structure pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="5961"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,6:mainincome"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="AssignmentsView" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="52"/><column index="3" value="141"/><column index="4" value="62"/><column index="5" value="55"/><column index="6" value="69"/><column index="7" value="246"/><column index="8" value="59"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="expenses" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="165"/><column index="3" value="49"/><column index="4" value="57"/><column index="5" value="74"/><column index="6" value="73"/><column index="7" value="52"/><column index="8" value="300"/><column index="9" value="45"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="income" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort><column index="4" mode="0"/></sort><column_widths><column index="1" value="113"/><column index="2" value="52"/><column index="3" value="57"/><column index="4" value="161"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="loans" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="40"/><column index="2" value="149"/><column index="3" value="60"/><column index="4" value="91"/><column index="5" value="62"/><column index="6" value="251"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="months" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="49"/><column index="2" value="92"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="payroll_cycle" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="67"/><column index="2" value="67"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1">select date(start), date(end) from payroll_cycle;
+
+select bill, amount, deadline, date(start), date(end) from expenses, payroll_cycle
+where julianday(deadline) &gt;= payroll_cycle.start
+AND julianday(deadline) &lt;= payroll_cycle.end;
+
+with 
+	incoming_expenses AS (
+		SELECT bill, amount, deadline, date(start), date(end)
+		FROM expenses, payroll_cycle
+		WHERE
+			julianday(deadline) &gt;= payroll_cycle.start AND
+			julianday(deadline) &lt;= payroll_cycle.end AND
+			source = 'debit'
+	),
+	currently_amassed AS (
+		SELECT *
+		FROM income, payroll_cycle
+		WHERE julianday(date) &gt;= payroll_cycle.start -10
+		AND julianday(date) &lt;= payroll_cycle.end
+	)
+
+select
+	sum(progress.amount) AS progress,
+	sum(goal.amount)     AS goal,
+	sum(goal.amount) - sum(progress.amount) AS REQUIRED
+FROM
+	incoming_expenses AS goal,
+	currently_amassed AS progress,
+	payroll_cycle     AS pc
+
+-----------------------
+select sum(amount) from (
+		SELECT *
+		FROM income, payroll_cycle
+		WHERE julianday(date) &gt;= payroll_cycle.start -10
+		AND julianday(date) &lt;= payroll_cycle.end)
+
+
+
+---------------------------- CHATGPT
+
+
+
+WITH current_payroll AS (
+    SELECT 
+        pc.start AS payroll_start,
+        pc.end AS payroll_end
+    FROM payroll_cycle pc
+    WHERE pc.start &lt;= '2024-01-23' AND pc.end &gt;= '2024-01-16'
+),
+goal AS (
+    SELECT 
+        SUM(e.amount) AS goal_amount
+    FROM expenses e
+    JOIN current_payroll cp ON e.deadline BETWEEN cp.payroll_start AND cp.payroll_end
+    WHERE e.source = 'debit'
+),
+progress AS (
+    SELECT 
+        COALESCE(SUM(i.amount), 0) AS progress_amount
+    FROM income i
+    JOIN current_payroll cp ON i.date BETWEEN cp.payroll_start AND cp.payroll_end
+)
+SELECT
+    goal.goal_amount AS goal,
+    progress.progress_amount AS progress,
+    goal.goal_amount - progress.progress_amount AS remaining
+FROM
+    goal,
+    progress;
+
+
+
+
+-----------------------------
+
+
+
+
+
+
+-- select (		SELECT amount FROM income, payroll_cycle
+-- 		WHERE julianday(date) &gt;= payroll_cycle.start
+-- 		AND julianday(date) &lt;= payroll_cycle.end)
+-- 		
+-- 		SELECT COALESCE(
+--          (SELECT amount
+--           FROM income, payroll_cycle
+--           WHERE JULIANDAY(date) &gt;= JULIANDAY(payroll_cycle.start)
+--             AND JULIANDAY(date) &lt;= JULIANDAY(payroll_cycle.end)),
+--          0) AS result;</sql><current_tab id="0"/></tab_sql></sqlb_project>
