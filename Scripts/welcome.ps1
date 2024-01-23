@@ -7,7 +7,7 @@ Clear-Host
 # Display datetime
 $date = get-date -format "dddd, MMMM d, yyyy"
 $time = get-date -format "hh:mm tt"
-write-host "`nTODAY IS:" (fgo (u $date)) (f (fgg $time))
+write-host "`nTODAY IS: $orange$line$date$0d", "$blink$green$time$0d"
 
 # Display database
 Write-Host "`nCurrent database: OMNIRECORDS ($($config.database))`n"
