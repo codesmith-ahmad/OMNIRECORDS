@@ -13,8 +13,11 @@ RESTORE:
 
 function backup {
     $timestamp = Get-Date -Format "MMMdd-HHmmss"
-    $backupPath = "C:\OMNIRECORDS\tmp\omnirecords_$timestamp"
-    $checkpointPath = "C:\OMNIRECORDS\tmp\last-checkpoint"
+    # $backupPath = "C:\OMNIRECORDS\tmp\omnirecords_$timestamp"
+    # $checkpointPath = "C:\OMNIRECORDS\tmp\last-checkpoint"
+    $BackupPath = $config.db_backup.backupPath + $timestamp
+    $checkpointPath = $config.db_backup.checkpointPath
+    "checkpoint is ", $checkpointPath
 
     # Copy omnirecords.db to backup path
     Copy-Item $config.database -Destination "$backupPath.db"

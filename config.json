@@ -6,6 +6,10 @@
 		"foregroundANSI": "`e[33m"
 	},
 	"database": "C:\\OMNIRECORDS\\omnirecords.db",
+	"db_backup": {
+		"backupPath": "D:\\OMNIRECORDS-BACKUP\\omnirecords_",
+    	"checkpointPath": "C:\\OMNIRECORDS\\tmp\\last-checkpoint"
+	},
 	"paths": {
 		"nexus": "C:\\Users\\Ahmad\\ONEDRI~1\\NEXUS",
 		"AESkey": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\KEYS\\.key",

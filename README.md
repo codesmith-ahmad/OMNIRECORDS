@@ -1,4 +1,4 @@
-# OMNIRECORDS: Custom SQLite terminal (replacing Memento Database)
+# OMNIRECORDS: SQLite database with Powershell as frontend (outdated README)
 
 ---
 
