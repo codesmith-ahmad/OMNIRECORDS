@@ -3,6 +3,8 @@
 $origin = "C:\OMNIRECORDS"  # Define origin
 Set-Location $origin
 
+# MODIFICATION OF PATH VARIABLES (LIST OF DIRECTORIES)
+$env:Path += ';C:\sqlite'
 
 # SCRIPTS
 

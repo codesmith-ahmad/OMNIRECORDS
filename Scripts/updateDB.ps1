@@ -3,3 +3,10 @@
 
 git pull
 Write-Host ""
+
+sql @"
+UPDATE _timestamp SET
+    unix = (SELECT strftime('%s', 'now')),
+    julian = (SELECT julianday('now')),
+    iso8601 = (SELECT datetime('now'))
+"@
