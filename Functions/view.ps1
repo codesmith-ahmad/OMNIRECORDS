@@ -51,6 +51,16 @@ function viewAssignments ($wrapSignal) {
     else {$assignments| Format-Table -wrap}
 
     # Write-Host "`n`e[3m`e[93mActions:\n`e[0m"
+    $b = Read-Host @"
+${yellow}[1] Go to assignments folder
+[2] Go to Brightspace
+[ ] Skip
+
+>>>>>>$0d 
+"@
+
+    if ($b -eq 1){saps "C:\Users\Ahmad\OneDrive\ASSIGNMENTS"}
+    if ($b -eq 2){saps "https://brightspace.algonquincollege.com/d2l/home"}
 }
 
 function viewExpenses ($wrapSignal){
