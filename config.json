@@ -5,7 +5,7 @@
 		"foregroundColor": "DarkYellow",
 		"foregroundANSI": "`e[33m"
 	},
-	"database": "C:\\OMNIRECORDS\\omnirecords.db",
+	"database": "C:\\Users\\Ahmad\\OneDrive\\OMNIRECORDS\\omnirecords.db",
 	"db_backup": {
 		"backupPath": "D:\\OMNIRECORDS-BACKUP\\omnirecords_",
     	"checkpointPath": "C:\\OMNIRECORDS\\tmp\\last-checkpoint"
