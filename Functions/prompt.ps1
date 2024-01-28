@@ -4,7 +4,7 @@ function prompt {
     $0 = [char]27 + '[0m'  # ANSI escape code to reset text color
 
     if ($PWD.Path -eq $origin) {
-        "OMNIRECORDS> "
+        "> "
     } elseif ($PWD.Path -like "*\NEXUS\*") {
         $nexusPart = $PWD.Path -replace ".*\\NEXUS\\?", "NEXUS\"
         "${grey}$nexusPart${0}>"
