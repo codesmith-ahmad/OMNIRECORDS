@@ -5,29 +5,9 @@
 		"foregroundColor": "DarkYellow",
 		"foregroundANSI": "`e[33m"
 	},
-	"database": {
-		"path": "C:\\OMNIRECORDS\\Database\\OMNIRECORDS.db",
-		"connectionString": "Server=myServer;Database=myDatabase;User=myUser;Password=myPassword;"
-    },
-	"paths": {
-		"nexus": "C:\\Users\\Ahmad\\ONEDRI~1\\NEXUS",
-		"AESkey": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\KEYS\\.key",
-		"modules": ".\\Modules",
-		"ressources": ".\\Ressources",
-		"scripts": ".\\Scripts",
-		"classroom": {
-			"location": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom",
-			"mathbook": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom\\math_practice_book.pdf",
-			"progress": "C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom\\progress.json",
-			"notes":"C:\\Users\\Ahmad\\OneDrive - Algonquin College\\NEXUS\\z~MISC\\Classroom\\notes.txt"	
-		}
-    },
-    "apiKeys": {
-      "weatherApiKey": "YOUR_API_KEY_HERE",
-      "paymentGatewayApiKey": "ANOTHER_API_KEY"
-    },
-    "features": {
-      "featureAEnabled": true,
-      "featureBEnabled": false
-    }
+	"database": "C:\\Users\\Ahmad\\OneDrive\\OMNIRECORDS\\omnirecords.db",
+	"db_backup": {
+		"backupPath": "D:\\OMNIRECORDS-BACKUP\\omnirecords_",
+    	"checkpointPath": "C:\\OMNIRECORDS\\tmp\\last-checkpoint"
+	}
 }
