@@ -1,4 +1,6 @@
-# OMNIRECORDS: SQLite database with Powershell as frontend (outdated README)
+REMOVED ALL SENSITIVE DATA FROM COMMIT HISTORY
+
+# ~~OMNIRECORDS: SQLite database with Powershell as frontend (outdated README)~~
 
 ---
 
